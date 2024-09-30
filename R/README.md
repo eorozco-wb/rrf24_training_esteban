@@ -1,6 +1,6 @@
 # Reproducible Research Fundamentals 2024 - R
 
-Training: EO gitflow session
+Training: EO gitflow session updating ReadMe
 
 Welcome to the **Reproducible Research Fundamentals 2024** training repository. This repository will guide you through all the exercises across the following stages:
 
