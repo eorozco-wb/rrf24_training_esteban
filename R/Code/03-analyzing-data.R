@@ -3,6 +3,8 @@
 
 renv::snapshot()
 
+install.packages("stargazer")
+
 #Libraries
 library(haven)
 library(dplyr)
@@ -10,6 +12,8 @@ library(modelsummary)
 library(stargazer)
 library(ggplot2)
 library(tidyr)
+library(stargazer)
+
 
 
 # Load data 
@@ -48,17 +52,17 @@ balance_table <- datasummary_balance(
 # Regressions ----
 
 # Model 1: Food consumption regressed on treatment
-model1 <- lm(......, data = hh_data)
+model1 <- lm(food_cons ~ treatment, data = hh_data)
 
 # Model 2: Add controls (crop_damage, drought_flood)
-model2 <- lm(......, data = hh_data)
+model2 <- lm(food_cons ~ treatment + crop_damage + drought_flood, data = hh_data)
 
 # Model 3: Add FE by district
-model3 <- lm(......, data = hh_data)
+model3 <- lm(food_cons ~ treatment + crop_damage + drought_flood + factor(district), data = hh_data)
 
 # Create regression table using stargazer
 stargazer(
-    ......,
+    model1, model2, model3,
     title = "Food Consumption Effects",
     keep = c("treatment", "crop_damage", "drought_flood"),
     covariate.labels = c("Treatment",
@@ -83,13 +87,13 @@ hh_data_plot <- hh_data %>%
 
 # Create the bar plot
 # Create the bar plot
-ggplot(hh_data_plot, aes(......) +
-    geom_bar(......) +
-    geom_text(......) +  # Add text labels
-    facet_wrap(......) +  # Facet by district
+ggplot(hh_data_plot)  +
+    geom_bar((aes(y=area_acre)) +
+    # geom_text(......) +  # Add text labels
+    # facet_wrap(district) +  # Facet by district
     labs(title = "Area cultivated by treatment assignment across districts",
          x = NULL, y = "Average area cultivated (Acre)") +  # Remove x-axis title
-    theme_minimal() +
+    theme_minimal())
     ...... # Add other customization if needed
 
 ggsave(file.path("Outputs", "fig1.png"), width = 10, height = 6)
