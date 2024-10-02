@@ -2,6 +2,7 @@
 # 02. Data construction
 # RRF - 2024 - Construction
 
+renv::snapshot()
 # Preliminary - Load Data ----
 # Load household-level data (HH)
 hh_data <- read_dta(file.path(data_path, "Intermediate/TZA_CCT_HH.dta"))

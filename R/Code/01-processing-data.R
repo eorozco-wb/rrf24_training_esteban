@@ -2,12 +2,16 @@
 # 01. Data processing
 
 ### Libraries
+install.packages("renv")
+library(renv)
+renv::init()
 
 install.packages("haven")
 install.packages("dplyr")
 install.packages("tidyr")
 install.packages("stringr")
 install.packages("labelled")
+
 
 library(haven)
 library(dplyr)
