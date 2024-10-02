@@ -1,17 +1,20 @@
 # Reproducible Research Fundamentals 
 # 03. Data Analysis
 
-# Libraries
-# library(haven)
-# library(dplyr)
-# library(modelsummary)
-# library(stargazer)
-# library(ggplot2)
-# library(tidyr)
+renv::snapshot()
+
+#Libraries
+library(haven)
+library(dplyr)
+library(modelsummary)
+library(stargazer)
+library(ggplot2)
+library(tidyr)
+
 
 # Load data 
 #household level data
-data_path <- "ADD-YOUR-PATH"
+data_path <- "/Users/estebanorozco/Documents/GitHub/rrf24_training_esteban/R/DataWork/Data"
 hh_data   <- read_dta(file.path(data_path, "Final/TZA_CCT_analysis.dta"))
 
 # secondary data 
@@ -21,9 +24,12 @@ secondary_data <- read_dta(file.path(data_path, "Final/TZA_amenity_analysis.dta"
 # Summary statistics ----
 
 # Create summary statistics by district and export to CSV
+data_renamed <- hh_data %>% 
+    select(hh_size, n_child_5, n_elder, read, sick, district,treatment)
+
 summary_table <- datasummary(
-    ...... ~ ...... * (Mean + SD), 
-    data = hh_data,
+    All(data_renamed) ~ as_factor(district)  * (Mean + SD), 
+    data = data_renamed,
     title = "Summary Statistics by District",
     output = file.path("Outputs", "summary_table.csv")  # Change to CSV
 )
@@ -31,8 +37,8 @@ summary_table <- datasummary(
 
 # Balance table ----
 balance_table <- datasummary_balance(
-    ...... ~ ......,
-    data = hh_data,
+    All(data_renamed) ~ treatment,
+    data = data_renamed,
     stars = TRUE,
     title = "Balance by Treatment Status",
     note = "Includes HHS with observations for baseline and endline",
