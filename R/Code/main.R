@@ -3,8 +3,6 @@
 # Load libraries ---- 
 
 # Load necessary libraries
-library(renv)
-#renv::init()
 library(haven)  # for reading .dta files
 library(dplyr)  # for data manipulation
 library(tidyr)  # for reshaping data
@@ -33,6 +31,6 @@ data_path <- "/Users/estebanorozco/Documents/DataWork/Data"
 
 # Run the R scripts ----
 
-source("/Users/estebanorozco/Documents/GitHub/rrf24_training_esteban/R/Code/01-processing-data.R")
-source("/Users/estebanorozco/Documents/GitHub/rrf24_training_esteban/R/Code/02-constructing-data.R")
-source("/Users/estebanorozco/Documents/GitHub/rrf24_training_esteban/R/Code/03-analyzing-data.R")
+source("Code/01-processing-data.R")
+source("Code/02-constructing-data.R")
+source("Code/03-analyzing-data.R")
